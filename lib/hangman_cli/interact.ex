@@ -1,10 +1,10 @@
 defmodule HangmanCli.Interact do
-  alias HangmanCli.State
+  alias HangmanCli.{Player, State}
 
   def start() do
     Hangman.new_game()
     |> setup_state()
-    |> IO.inspect()
+    |> Player.play()
   end
 
   defp setup_state(game) do
