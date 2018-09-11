@@ -1,5 +1,5 @@
 defmodule HangmanCli.Player do
-  alias HangmanCli.State
+  alias HangmanCli.{Prompter, State, Summary}
 
   # won, lost, good guess, bad guess, already used, initializing
   def play(%State{tally: %{game_state: :won}}) do
@@ -33,18 +33,10 @@ defmodule HangmanCli.Player do
 
   def continue(game) do
     game
-    |> display()
-    |> prompt()
+    |> Summary.display()
+    |> Prompter.accept_move()
     |> make_move()
     |> play()
-  end
-
-  def display(game) do
-    game
-  end
-
-  def prompt(game) do
-    game
   end
 
   def make_move(game) do
