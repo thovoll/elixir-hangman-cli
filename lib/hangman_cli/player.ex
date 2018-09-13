@@ -1,13 +1,14 @@
 defmodule HangmanCli.Player do
-  alias HangmanCli.{Prompter, State, Summary}
+  alias HangmanCli.{Mover, Prompter, State, Summary}
 
   # won, lost, good guess, bad guess, already used, initializing
   def play(%State{tally: %{game_state: :won}}) do
     exit_with_message("You WIN!")
   end
 
-  def play(%State{tally: %{game_state: :lost}}) do
-    exit_with_message("Sorry, you lost")
+  def play(state = %State{tally: %{game_state: :lost}}) do
+    word = Enum.join(state.game_service.letters)
+    exit_with_message("Sorry, you lost (the word was: #{word})")
   end
 
   def play(game = %State{tally: %{game_state: :good_guess}}) do
@@ -33,9 +34,9 @@ defmodule HangmanCli.Player do
 
   def continue(game) do
     game
-    |> Summary.display()
+    |> Summary.display!()
     |> Prompter.accept_move()
-    |> make_move()
+    |> Mover.make_move()
     |> play()
   end
 
