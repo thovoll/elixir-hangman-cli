@@ -27,11 +27,6 @@ defmodule HangmanCli.Player do
     continue(game)
   end
 
-  def continue_with_message(game, msg) do
-    IO.puts(msg)
-    continue(game)
-  end
-
   def continue(game) do
     game
     |> Summary.display!()
@@ -40,8 +35,9 @@ defmodule HangmanCli.Player do
     |> play()
   end
 
-  def make_move(game) do
-    game
+  def continue_with_message(game, msg) do
+    IO.puts(msg)
+    continue(game)
   end
 
   defp exit_with_message(msg) do
