@@ -1,6 +1,6 @@
 defmodule HangmanCli.Prompter do
   alias HangmanCli.State
-  
+
   def accept_move(state = %State{}) do
     IO.gets("Your guess: ")
     |> check_input(state)
@@ -18,9 +18,11 @@ defmodule HangmanCli.Prompter do
 
   defp check_input(input, state = %State{}) do
     input = String.trim(input)
+
     cond do
       input =~ ~r/\A[a-z]\z/ ->
         Map.put(state, :guess, input)
+
       true ->
         IO.puts("Please enter a single lowercase letter")
         accept_move(state)

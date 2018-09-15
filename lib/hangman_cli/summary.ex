@@ -1,6 +1,6 @@
 defmodule HangmanCli.Summary do
   def display!(game = %{tally: tally}) do
-    #IO.inspect(game)
+    # IO.inspect(game)
     IO.puts([
       "\n",
       "Word so far: #{Enum.join(tally.letters, " ")}",
@@ -10,6 +10,7 @@ defmodule HangmanCli.Summary do
       "Letters used: #{Enum.join(tally.used, " ")}",
       "\n"
     ])
+
     game
   end
 end
